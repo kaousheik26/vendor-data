@@ -18,7 +18,7 @@ if [ ! -d "$SCRIPTS" ]; then
 fi
 
 
-data_dir=data
+data_dir=$3
 exp_dir=hi_en_equal_$ENGLISH_WEIGHT
 
 mkdir -p $exp_dir
