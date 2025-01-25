@@ -46,7 +46,14 @@ python3 $BPEROOT/learn_bpe.py -s $HINDI_WEIGHT < $TRAIN_HI > $BPE_CODE_HIN
 echo "learn_bpe.py ${ENGLISH_WEIGHT} on ${TRAIN_ENG}..."
 python3 $BPEROOT/learn_bpe.py -s $ENGLISH_WEIGHT < $TRAIN_ENG > $BPE_CODE_ENG
 
-cat $BPE_CODE_ENG $BPE_CODE_HIN > $BPE_CODE
+cat $BPE_CODE_ENG <(tail -n +2 $BPE_CODE_HIN) > $BPE_CODE
 
+
+for L in $src $tgt; do
+    for f in train.$L dev.$L eval.$L; do
+        echo "apply_bpe.py to ${f}..."
+        python3 $BPEROOT/apply_bpe.py -c $BPE_CODE < $exp_dir/$f > $prep/$f
+    done
+done
 
 
