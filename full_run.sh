@@ -96,3 +96,7 @@ fairseq-generate $tgt/data-bin/iwslt14.tokenized.$tgt \
     --remove-bpe \
     --results-path $tgt/data-bin/cls-results \
     --nbest 1 --beam 5
+
+grep -E '^T' $tgt/data-bin/cls-results/generate-test.txt | cut -d$'\t' -f2 > $tgt/data-bin/cls-results/ref
+grep -E '^H' $tgt/data-bin/cls-results/generate-test.txt | cut -d$'\t' -f3 > $tgt/data-bin/cls-results/hyp
+python3 wer.py $tgt/data-bin/cls-results/
