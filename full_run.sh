@@ -65,7 +65,7 @@ fairseq-preprocess --source-lang $src --target-lang $tgt \
     --destdir $tgt/data-bin/iwslt14.tokenized.$tgt \
     --workers 20
 
-UDA_VISIBLE_DEVICES=0 fcairseq-train $tgt/data-bin/iwslt14.tokenized.$tgt  \
+UDA_VISIBLE_DEVICES=$2 fairseq-train $tgt/data-bin/iwslt14.tokenized.$tgt  \
    --arch transformer_iwslt_de_en \
    --share-decoder-input-output-embed  \
    --optimizer adam --adam-betas '(0.9, 0.98)' \
