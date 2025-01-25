@@ -65,7 +65,7 @@ fairseq-preprocess --source-lang $src --target-lang $tgt \
     --destdir $tgt/data-bin/iwslt14.tokenized.$tgt \
     --workers 20
 
-UDA_VISIBLE_DEVICES=$2 fairseq-train $tgt/data-bin/iwslt14.tokenized.$tgt  \
+CUDA_VISIBLE_DEVICES=$2 fairseq-train $tgt/data-bin/iwslt14.tokenized.$tgt  \
    --arch transformer_iwslt_de_en \
    --share-decoder-input-output-embed  \
    --optimizer adam --adam-betas '(0.9, 0.98)' \
@@ -87,3 +87,12 @@ UDA_VISIBLE_DEVICES=$2 fairseq-train $tgt/data-bin/iwslt14.tokenized.$tgt  \
    --save-dir $tgt/data-bin/checkpoints \
    --max-epoch 40 \
    --save-interval 10
+
+echo "Generating"
+
+fairseq-generate $tgt/data-bin/iwslt14.tokenized.$tgt \
+    --path $tgt/data-bin/checkpoints/checkpoint_best.pt \
+    --batch-size 128  \
+    --remove-bpe \
+    --results-path $tgt/data-bin/cls-results \
+    --nbest 1 --beam 5
