@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# Adapted from https://github.com/facebookresearch/MIXER/blob/master/prepareData.sh
+
+
+SCRIPTS=mosesdecoder/scripts
+TOKENIZER=$SCRIPTS/tokenizer/tokenizer.perl
+LC=$SCRIPTS/tokenizer/lowercase.perl
+CLEAN=$SCRIPTS/training/clean-corpus-n.perl
+BPEROOT=subword-nmt/subword_nmt
+BPE_TOKENS=10000
+ENGLISH_WEIGHT=$1
+HINDI_WEIGHT=$(($BPE_TOKENS - $ENGLISH_WEIGHT))
+
+if [ ! -d "$SCRIPTS" ]; then
+    echo "Please set SCRIPTS variable correctly to point to Moses scripts."
+    exit
+fi
+
+
+data_dir=data
+exp_dir=hi_en_$ENGLISH_WEIGHT
+
+mkdir -p $exp_dir
+
+cp data/dev.cls $exp_dir
+cp data/eval.cls $exp_dir
+cp data/eval.ns $exp_dir/eval.$exp_dir
+cp data/dev.ns $exp_dir/dev.$exp_dir
+cp data/train.cls $exp_dir
+cp data/train.ns $exp_dir/train.$exp_dir
+
+src=cls
+tgt=$exp_dir
+
+prep=$exp_dir/iwslt14.tokenized.$src-$tgt
+mkdir -p $prep
+BPE_CODE=$prep/code
+BPE_CODE_HIN=$prep/code_hi
+BPE_CODE_ENG=$prep/code_en
+TRAIN_HI=$data_dir/train.hi
+TRAIN_ENG=$data_dir/train.eng
+
+echo "learn_bpe.py ${HINDI_WEIGHT} on ${TRAIN_HIN}..."
+python3 $BPEROOT/learn_bpe.py -s $HINDI_WEIGHT < $TRAIN_HI > $BPE_CODE_HIN
+echo "learn_bpe.py ${ENGLISH_WEIGHT} on ${TRAIN_ENG}..."
+python3 $BPEROOT/learn_bpe.py -s $ENGLISH_WEIGHT_WEIGHT < $TRAIN_ENG > $BPE_CODE_ENG
+
+cat $BPE_CODE_ENG $BPE_CODE_HIN > $BPE_CODE
+
+
+
