@@ -19,16 +19,16 @@ fi
 
 
 data_dir=data
-exp_dir=hi_en_$ENGLISH_WEIGHT
+exp_dir=hi_en_equal_$ENGLISH_WEIGHT
 
 mkdir -p $exp_dir
 
-cp data/dev.cls $exp_dir
-cp data/eval.cls $exp_dir
-cp data/eval.ns $exp_dir/eval.$exp_dir
-cp data/dev.ns $exp_dir/dev.$exp_dir
-cp data/train.cls $exp_dir
-cp data/train.ns $exp_dir/train.$exp_dir
+cp $data_dir/dev.cls $exp_dir
+cp $data_dir/eval.cls $exp_dir
+cp $data_dir/eval.ns $exp_dir/eval.$exp_dir
+cp $data_dir/dev.ns $exp_dir/dev.$exp_dir
+cp $data_dir/train.cls $exp_dir
+cp $data_dir/train.ns $exp_dir/train.$exp_dir
 
 src=cls
 tgt=$exp_dir
