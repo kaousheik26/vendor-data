@@ -41,10 +41,10 @@ BPE_CODE_ENG=$prep/code_en
 TRAIN_HI=$data_dir/train.hi
 TRAIN_ENG=$data_dir/train.eng
 
-echo "learn_bpe.py ${HINDI_WEIGHT} on ${TRAIN_HIN}..."
+echo "learn_bpe.py ${HINDI_WEIGHT} on ${TRAIN_HI}..."
 python3 $BPEROOT/learn_bpe.py -s $HINDI_WEIGHT < $TRAIN_HI > $BPE_CODE_HIN
 echo "learn_bpe.py ${ENGLISH_WEIGHT} on ${TRAIN_ENG}..."
-python3 $BPEROOT/learn_bpe.py -s $ENGLISH_WEIGHT_WEIGHT < $TRAIN_ENG > $BPE_CODE_ENG
+python3 $BPEROOT/learn_bpe.py -s $ENGLISH_WEIGHT < $TRAIN_ENG > $BPE_CODE_ENG
 
 cat $BPE_CODE_ENG $BPE_CODE_HIN > $BPE_CODE
 
