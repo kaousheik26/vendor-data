@@ -34,7 +34,7 @@ for ref_line, hyp_line in zip(ref_lines, hyp_lines):
     
     for word_ref, word_hyp in zip(ref_line.strip().split(" "), hyp_line.strip().split(" ")):
         if word_hyp == word_ref:
-            lang = identify_lang(word_ref):
+            lang = identify_lang(word_ref)
             if lang == 'english':
                 total_english_count += 1
         if word_hyp != word_ref:
