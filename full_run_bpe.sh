@@ -32,16 +32,12 @@ src=cls
 tgt=$exp_dir
 
 prep=$exp_dir/iwslt14.tokenized.$src-$tgt
-tmp=$prep/tmp
-mkdir -p $prep $tmp
+mkdir -p $prep
 BPE_CODE=$prep/code
 
-TRAIN=$tmp/train.en-de
-rm -f $TRAIN
-for l in $src $tgt; do
-    cat $tmp/train.$l >> $TRAIN
-done
-
+$TRAIN=$exp_dir/train
+cat $exp_dir/train.cls $exp_dir/train.$exp_dir >> $exp_dir/train
+python3 $BPEROOT/learn_bpe.py -s $BPE_TOKENS < $TRAIN > $BPE_CODE
 
 for L in $src $tgt; do
     for f in train.$L dev.$L eval.$L; do
