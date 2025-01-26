@@ -35,7 +35,7 @@ prep=$exp_dir/iwslt14.tokenized.$src-$tgt
 mkdir -p $prep
 BPE_CODE=$prep/code
 
-$TRAIN=$exp_dir/train
+TRAIN=$exp_dir/train
 cat $exp_dir/train.cls $exp_dir/train.$exp_dir >> $exp_dir/train
 python3 $BPEROOT/learn_bpe.py -s $BPE_TOKENS < $TRAIN > $BPE_CODE
 
