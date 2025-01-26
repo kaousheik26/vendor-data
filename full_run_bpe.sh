@@ -36,7 +36,10 @@ mkdir -p $prep
 BPE_CODE=$prep/code
 
 TRAIN=$exp_dir/train
+echo "cat $exp_dir/train.cls $exp_dir/train.$exp_dir >> $exp_dir/train"
 cat $exp_dir/train.cls $exp_dir/train.$exp_dir >> $exp_dir/train
+
+echo "Learning bpes $BPEROOT/learn_bpe.py -s $BPE_TOKENS < $TRAIN > $BPE_CODE"
 python3 $BPEROOT/learn_bpe.py -s $BPE_TOKENS < $TRAIN > $BPE_CODE
 
 for L in $src $tgt; do
