@@ -2,24 +2,24 @@
 # 1. Train SentencePiece (using cls input data)
 cat raw_data/train.cls raw_data/train.ns > raw_data/combined.txt
 
-spm_train \
-    --input raw_data/combined.txt \
-    --model_prefix processed_data/spm \
-    --vocab_size 10000 \
-    --character_coverage 0.9995 \
-    --model_type unigram \
-    --input_sentence_size 1000000 \
-    --shuffle_input_sentence true
+# spm_train \
+#     --input raw_data/combined.txt \
+#     --model_prefix processed_data/spm \
+#     --vocab_size 10000 \
+#     --character_coverage 0.9995 \
+#     --model_type unigram \
+#     --input_sentence_size 1000000 \
+#     --shuffle_input_sentence true
 
-# 2. Apply tokenization (notice the changed extensions)
-spm_encode --model=processed_data/spm.model < raw_data/train.cls > processed_data/train.cls-ns.cls
-spm_encode --model=processed_data/spm.model < raw_data/train.ns > processed_data/train.cls-ns.ns
+# # 2. Apply tokenization (notice the changed extensions)
+# spm_encode --model=processed_data/spm.model < raw_data/train.cls > processed_data/train.cls-ns.cls
+# spm_encode --model=processed_data/spm.model < raw_data/train.ns > processed_data/train.cls-ns.ns
 
-spm_encode --model=processed_data/spm.model < raw_data/valid.cls > processed_data/valid.cls-ns.cls
-spm_encode --model=processed_data/spm.model < raw_data/valid.ns > processed_data/valid.cls-ns.ns
+# spm_encode --model=processed_data/spm.model < raw_data/valid.cls > processed_data/valid.cls-ns.cls
+# spm_encode --model=processed_data/spm.model < raw_data/valid.ns > processed_data/valid.cls-ns.ns
 
-spm_encode --model=processed_data/spm.model < raw_data/test.cls > processed_data/test.cls-ns.cls
-spm_encode --model=processed_data/spm.model < raw_data/test.ns > processed_data/test.cls-ns.ns
+# spm_encode --model=processed_data/spm.model < raw_data/test.cls > processed_data/test.cls-ns.cls
+# spm_encode --model=processed_data/spm.model < raw_data/test.ns > processed_data/test.cls-ns.ns
 
 # 3. Preprocess (changed source-lang and target-lang)
 fairseq-preprocess \
@@ -32,7 +32,7 @@ fairseq-preprocess \
     --joined-dictionary
 
 # 4. Train (similar command but with cls-ns instead of hi-en)
-fairseq-train \
+CUDA_VISIBLE_DEVICES=3 fairseq-train \
     data-bin \
     --arch transformer \
     --share-decoder-input-output-embed \
