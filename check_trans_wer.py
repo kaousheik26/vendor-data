@@ -30,6 +30,7 @@ with open(hyp) as f:
 lines = []
 total_english_count = 0
 error_count = 0
+correct_count = 0
 correct_trans = []
 for ref_line, hyp_line in zip(ref_lines, hyp_lines):
     
@@ -38,6 +39,7 @@ for ref_line, hyp_line in zip(ref_lines, hyp_lines):
             lang = identify_lang(word_ref)
             if lang == 'english':
                 total_english_count += 1
+                correct_count += 1
                 correct_trans.append(f"{word_ref} {word_hyp} \n")
         if word_hyp != word_ref:
             lang = identify_lang(word_ref)
@@ -48,7 +50,7 @@ for ref_line, hyp_line in zip(ref_lines, hyp_lines):
             lines.append(f"{word_ref} {word_hyp} \n")
             
 
-print(error_count, total_english_count)
+print(correct_count, error_count, total_english_count)
 with open(f"{sys.argv[1]}/trans-errors", "w") as f:
     f.writelines(lines)
     
