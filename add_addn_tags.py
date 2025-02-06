@@ -19,17 +19,18 @@ for hyp_line, ref_line in zip(hyp_lines, ref_lines):
     
     hyp_len = len(hyp_line.split(" "))
     ref_len = len(ref_line.split(" "))
-    hyp_words.append(hyp_line.split(" "))
-    ref_words.append(ref_line.split(" "))
+    print(hyp_len, ref_len)
+    hyp_words.extend(hyp_line.split(" "))
+    ref_words.extend(ref_line.split(" "))
     if hyp_len > ref_len:
         extra = hyp_len - ref_len
         ref_words.extend([ref_tok]*extra)
     elif ref_len > hyp_len:
         extra = ref_len - hyp_len
-        hyp_words.extend([hyp_len]*extra)
-    
+        hyp_words.extend([hyp_tok]*extra)
+
 with open("large/eval-asr.cls", "w") as f:
     f.writelines(word + '\n' for word in hyp_words)
         
 with open("large/eval-asr.large", "w") as f:
-    f.writelines(word + '\n' for word in hyp_words)
+    f.writelines(word + '\n' for word in ref_words)
