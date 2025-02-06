@@ -19,8 +19,8 @@ final_ref = []
 count = 0
 for line in org_lines:
     length = len(line.strip().split(" "))
-    h = ' '.join(hyp_lines[count:length])
-    r = ' '.join(ref_lines[count:length])
+    h = ' '.join(hyp_lines[count:count+length])
+    r = ' '.join(ref_lines[count:count+length])
     final_hyp.append(h)
     final_ref.append(r)
     count += length
