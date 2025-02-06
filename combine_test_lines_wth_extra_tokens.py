@@ -20,13 +20,14 @@ with open(ref_res) as f:
 count = 0
 final_hyp = []
 final_ref = []
-
+hyp_res_lines = [line.strip() for line in hyp_res_lines]
+ref_res_lines = [line.strip() for line in ref_res_lines]
 for hyp_line, ref_line in zip(hyp_org_lines, ref_org_lines):
     hyp_line = hyp_line.strip()
     ref_line = ref_line.strip()
     
-    hyp_len = hyp_line.split(" ")
-    ref_len = ref_line.split(" ")
+    hyp_len = len(hyp_line.split(" "))
+    ref_len = len(ref_line.split(" "))
     length = max(hyp_len, ref_len)
     
     h = ' '.join(hyp_res_lines[count:count+length])
