@@ -6,10 +6,25 @@ hyp = sys.argv[1]
 ref = sys.argv[2]
 
     
-hyp_words = hyp.strip().split(" ")
-ref_words = ref.strip().split(" ")
+with open(hyp) as f:
+    lines = f.readlines()
+  
+words = []  
+for line in lines:
+    line = line.strip()
+    for word in line.split(" "):
+        words.append(word)
+        
+with open("large/eval-temp.cls", "w") as f:
+    f.writelines(words)
     
-with open("eval-tmp.large", "w") as f:
-    f.writelines(word + "\n" for word in ref_words)
-with open("eval-tmp.cls", "w") as f:
-    f.writelines(word + "\n" for word in hyp_words)
+with open(ref) as f:
+    lines = f.readlines()
+words = []  
+for line in lines:
+    line = line.strip()
+    for word in line.split(" "):
+        words.append(word)
+
+with open("large/eval-temp.large", "w") as f:
+    f.writelines(words)
