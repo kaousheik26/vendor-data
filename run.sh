@@ -5,10 +5,10 @@ file1="eval-org.cls"
 file2="eval-org.large"
 test2="temp"
 # Check if files exist
-if [[ ! -f "$file1" || ! -f "$file2" ]]; then
-    echo "Error: One or both files do not exist."
-    exit 1
-fi
+# if [[ ! -f "$file1" || ! -f "$file2" ]]; then
+#     echo "Error: One or both files do not exist."
+#     exit 1
+# fi
 
 src=cls
 tgt=large
