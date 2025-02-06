@@ -28,31 +28,43 @@ with open(ref) as f:
 with open(hyp) as f:
     hyp_lines = f.readlines()
 lines = []
-total_english_count = 0
-error_count = 0
-correct_count = 0
-correct_trans = []
+total_words = 0
+correct_lang_switch = 0
+correct_hindi_switch = 0
+correct_english_switch = 0
+correct_lang_but_incorrect_word_hindi = 0
+correct_lang_but_incorrect_word_english = 0
+ref_hindi_hyp_eng = 0
+ref_eng_hyp_hindi = 0
 for ref_line, hyp_line in zip(ref_lines, hyp_lines):
     
     for word_ref, word_hyp in zip(ref_line.strip().split(" "), hyp_line.strip().split(" ")):
-        if word_hyp == word_ref:
-            lang = identify_lang(word_ref)
-            if lang == 'english':
-                total_english_count += 1
-                correct_count += 1
-                correct_trans.append(f"{word_ref} {word_hyp} \n")
-        if word_hyp != word_ref:
-            lang = identify_lang(word_ref)
-            if lang == 'english':
-                total_english_count += 1
-                print(word_hyp, word_ref)
-                error_count += 1
-            lines.append(f"{word_ref} {word_hyp} \n")
-            
+        ref_lang = identify_lang(word_ref)
+        hyp_lang = identify_lang(word_hyp)
+        total_words += 1
+        if ref_lang == hyp_lang:
+            correct_lang_switch += 1
+            if word_hyp == word_ref:
+                if ref_lang == 'hindi':
+                    correct_hindi_switch += 1
+                else:
+                    correct_english_switch +=1 
+            else:
+                if ref_lang == 'hindi':
+                    correct_lang_but_incorrect_word_hindi += 1
+                else:
+                    correct_lang_but_incorrect_word_english += 1
+        else:
+            if ref_lang == 'hindi':
+                ref_hindi_hyp_eng += 1
+            else:
+                ref_eng_hyp_hindi += 1
+                
 
-print(correct_count, error_count, total_english_count)
-with open(f"{sys.argv[1]}/trans-errors", "w") as f:
-    f.writelines(lines)
-    
-with open(f"{sys.argv[1]}/trans-correct", "w") as f:
-    f.writelines(correct_trans)
+print("Total Words: ", total_words)
+print("Correct English Switches: ", correct_english_switch)
+print("Correct Hindi Switches: ", correct_hindi_switch)
+print("Correctly Switched to hindi but incorrect word " correct_lang_but_incorrect_word_hindi)
+print("Correctly Switched to english but incorrect word " correct_lang_but_incorrect_word_english)
+print("Incorrect Lang switches - Hindi Ref: ", ref_hindi_hyp_eng)
+print("Incorrect Lang Switches - English Ref: ", ref_eng_hyp_hindi)
