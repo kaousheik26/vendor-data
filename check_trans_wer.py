@@ -62,10 +62,10 @@ for ref_line, hyp_line in zip(ref_lines, hyp_lines):
                 
 
 print("Total Words: ", total_words)
-print("Total correct Switches: ", correct_lang_switch, "--", float(correct_lang_switch / total_words))
-print("Correct English Switches: ", correct_english_switch, "out of ", correct_english_switch + correct_lang_but_incorrect_word_english + ref_eng_hyp_hindi, "--", float(correct_english_switch/(correct_english_switch + correct_lang_but_incorrect_word_english + ref_eng_hyp_hindi)))
-print("Correct Hindi Switches: ", correct_hindi_switch, "out of ", correct_hindi_switch + correct_lang_but_incorrect_word_hindi + ref_hindi_hyp_eng, "--", float(correct_hindi_switch/(correct_hindi_switch + correct_lang_but_incorrect_word_hindi + ref_hindi_hyp_eng)))
-print("Correctly Switched to hindi but incorrect word ", correct_lang_but_incorrect_word_hindi, "--", float(correct_lang_but_incorrect_word_hindi / total_words))
-print("Correctly Switched to english but incorrect word ", correct_lang_but_incorrect_word_english, "--", float(correct_lang_but_incorrect_word_english / total_words))
-print("Incorrect Lang switches - Hindi Ref: ", ref_hindi_hyp_eng, "--", float(ref_hindi_hyp_eng / total_words))
-print("Incorrect Lang Switches - English Ref: ", ref_eng_hyp_hindi, "--", float(ref_eng_hyp_hindi / total_words))
+print("Total correct Switches: ", correct_lang_switch, "--", round(float(correct_lang_switch / total_words)))
+print("Correct English Switches: ", correct_english_switch, "out of ", correct_english_switch + correct_lang_but_incorrect_word_english + ref_eng_hyp_hindi, "--", round(float(correct_english_switch/(correct_english_switch + correct_lang_but_incorrect_word_english + ref_eng_hyp_hindi))))
+print("Correct Hindi Switches: ", correct_hindi_switch, "out of ", correct_hindi_switch + correct_lang_but_incorrect_word_hindi + ref_hindi_hyp_eng, "--", round(float(correct_hindi_switch/(correct_hindi_switch + correct_lang_but_incorrect_word_hindi + ref_hindi_hyp_eng))))
+print("Correctly Switched to hindi but incorrect word ", correct_lang_but_incorrect_word_hindi, "--", round(float(correct_lang_but_incorrect_word_hindi / total_words)))
+print("Correctly Switched to english but incorrect word ", correct_lang_but_incorrect_word_english, "--", round(float(correct_lang_but_incorrect_word_english / total_words)))
+print("Incorrect Lang switches - Hindi Ref: ", ref_hindi_hyp_eng, "--", round(float(ref_hindi_hyp_eng / total_words)))
+print("Incorrect Lang Switches - English Ref: ", ref_eng_hyp_hindi, "--", round(float(ref_eng_hyp_hindi / total_words)))
