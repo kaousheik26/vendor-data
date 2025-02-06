@@ -19,7 +19,7 @@ chmod +x binarize-preprocess-test.sh
 
 python3 convert_each_lines.py $data_dir/$file1 $data_dir/$file2
 ./prepare-test.sh $src $tgt $data_dir $test2
-./binarize-preprocess.sh $src $tgt $test2
+./binarize-preprocess-test.sh $src $tgt $test2
 fairseq-generate $data_dir/data-bin/iwslt14.tokenized.$test2-$data_dir/ --path $data_dir/data-bin/checkpoints/best.pt --batch-size 128 --remove-bpe --results-path $data_dir/data-bin/cls-results-$test2 --nbest 1 --beam 5
 
 

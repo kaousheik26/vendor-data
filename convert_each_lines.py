@@ -13,7 +13,7 @@ words = []
 for line in lines:
     line = line.strip()
     for word in line.split(" "):
-        words.append(word)
+        words.append(word + '\n')
         
 with open("large/eval-temp.cls", "w") as f:
     f.writelines(words)
@@ -24,7 +24,7 @@ words = []
 for line in lines:
     line = line.strip()
     for word in line.split(" "):
-        words.append(word)
+        words.append(word + '\n')
 
 with open("large/eval-temp.large", "w") as f:
     f.writelines(words)
