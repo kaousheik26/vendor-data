@@ -22,8 +22,8 @@ for line in org_lines:
     length = len(line.strip().split(" "))
     h = ' '.join(hyp_lines[count:count+length])
     r = ' '.join(ref_lines[count:count+length])
-    final_hyp.append(h)
-    final_ref.append(r)
+    final_hyp.append(h + '\n')
+    final_ref.append(r + '\n')
     count += length
 
 
