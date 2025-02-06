@@ -13,7 +13,8 @@ with open(os.path.join(full_path, ref)) as f:
     
 with open(org) as f:
     org_lines = f.readlines()
-
+hyp_lines = [line.strip() for line in hyp_lines]
+ref_lines = [line.strip() for line in ref_lines]
 final_hyp = []
 final_ref = []
 count = 0
@@ -24,6 +25,7 @@ for line in org_lines:
     final_hyp.append(h)
     final_ref.append(r)
     count += length
+    break
 
 with open(os.path.join(full_path, "hyp"), "w" ) as f:
     f.writelines(final_hyp)
