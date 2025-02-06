@@ -25,7 +25,7 @@ for line in org_lines:
     final_hyp.append(h)
     final_ref.append(r)
     count += length
-    break
+
 
 with open(os.path.join(full_path, "hyp"), "w" ) as f:
     f.writelines(final_hyp)
